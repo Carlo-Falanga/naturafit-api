@@ -8,6 +8,9 @@ class Tag extends Model
 {
     protected $fillable = [
         'name',
-        'slug'
     ];
+
+    public function recipes(){
+        return $this->belongsToMany(Recipe::class);
+    }
 }
