@@ -27,7 +27,7 @@ return new class extends Migration
             $table->decimal("fats", 5, 2);
             $table->decimal("fiber", 5, 2);
             $table->decimal("sugar", 5, 2);
-            $table->text("instruction");
+            $table->text("instructions");
             $table->foreignId("category_id")->constrained();
             $table->timestamps();
         });
