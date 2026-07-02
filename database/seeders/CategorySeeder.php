@@ -25,7 +25,7 @@ class CategorySeeder extends Seeder
             'Contorni',
         ];
 
-        foreach($categories as $category){
+        foreach ($categories as $category) {
             $newCategory = new Category();
             $newCategory->name = $category;
             $newCategory->save();
