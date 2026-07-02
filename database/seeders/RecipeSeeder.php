@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Recipe;
+use App\Models\Tag;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
@@ -18,6 +19,7 @@ class RecipeSeeder extends Seeder
         $difficulties = ['facile', 'media', 'difficile'];
 
         $categories = Category::all();
+        $tags = Tag::all();
 
         for ($i = 0; $i < 10; $i++) {
             $newRecipe = new Recipe();
@@ -38,6 +40,9 @@ class RecipeSeeder extends Seeder
 
             $newRecipe->category_id = $categories->random()->id;
             $newRecipe->save();
+
+            $randomTags = $tags->random($faker->numberBetween(1, 3))->pluck('id');
+            $newRecipe->tags()->attach($randomTags);
         }
     }
 }
