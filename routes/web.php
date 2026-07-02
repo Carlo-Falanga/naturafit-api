@@ -18,8 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('admin')
+Route::middleware('auth')
     ->name('admin.')
+    ->prefix('admin')
     ->group(function () {
 
         Route::resource('categories', CategoryController::class);
