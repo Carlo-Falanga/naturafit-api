@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Recipe;
+use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class RecipeController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -34,7 +37,7 @@ class RecipeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Recipe $recipe)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +45,7 @@ class RecipeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Recipe $recipe)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +53,7 @@ class RecipeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Recipe $recipe)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +61,7 @@ class RecipeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Recipe $recipe)
+    public function destroy(string $id)
     {
         //
     }
