@@ -2,14 +2,6 @@
 
 @section('content')
 
-    @php
-        $recipes = \App\Models\Recipe::with('category')->latest()->get();
-        $totRecipes = \App\Models\Recipe::count();
-        $totCategories = \App\Models\Category::count();
-        $totTags = \App\Models\Tag::count();
-        $mediaKcal = round(\App\Models\Recipe::avg('calories'));
-    @endphp
-
     {{-- intestazione --}}
     <div class="d-flex justify-content-between align-items-start mb-4">
         <div>

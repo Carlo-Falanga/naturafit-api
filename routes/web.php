@@ -4,6 +4,9 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\RecipeController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Category;
+use App\Models\Recipe;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,7 +14,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', [
+        'recipes' => Recipe::with('category')->latest()->get(),
+        'totRecipes' => Recipe::count(),
+        'totCategories' => Category::count(),
+        'totTags' => Tag::count(),
+        'mediaKcal' => round(Recipe::avg('calories')),
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
