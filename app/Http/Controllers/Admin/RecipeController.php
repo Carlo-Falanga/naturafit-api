@@ -70,9 +70,14 @@ class RecipeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Recipe $recipe)
     {
-        //
+        $data = $request->all();
+        $recipe->update($data);
+
+        $recipe->tags()->sync($data['tags'] ?? []);
+
+        return redirect()->route('admin.recipes.index');
     }
 
     /**
