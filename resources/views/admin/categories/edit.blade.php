@@ -7,7 +7,7 @@
     <title>Nuova Categoria</title>
 </head>
 <body>
-    <form action="{{ route('admin.categories.update', $category->id) }}" method="POST">
+    <form action="{{ route('admin.categories.update', $category) }}" method="POST">
         @csrf
         @method('PUT')
 
