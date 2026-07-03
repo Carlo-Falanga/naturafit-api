@@ -23,7 +23,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admin.tags.create');
+        //
     }
 
     /**
@@ -54,8 +54,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-
-        return view('admin.tags.edit', compact('tag'));
+        //
     }
 
     /**
