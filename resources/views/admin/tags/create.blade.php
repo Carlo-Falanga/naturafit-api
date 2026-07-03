@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Categoria</title>
+    <title>Nuovo Tag</title>
 </head>
 <body>
-    <form action="{{ route('admin.categories.update', $category) }}" method="POST">
+    <form action="{{ route('admin.tags.store') }}" method="POST">
         @csrf
-        @method('PUT')
 
         <label for="name">Nome</label>
-        <input type="text" name="name" id="name" value="{{ $category->name }}">
+        <input type="text" name="name" id="name" value="{{ old('name') }}">
 
         <button type="submit">Salva</button>
     </form>
