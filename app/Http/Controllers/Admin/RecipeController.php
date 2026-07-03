@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Recipe;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -23,7 +25,10 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('admin.recipes.create', compact('categories', 'tags'));
     }
 
     /**
