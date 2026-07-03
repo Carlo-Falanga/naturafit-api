@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -12,7 +13,9 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        //
+        $recipes = Recipe::with('category', 'tags')->get();
+
+        return view('admin.recipes.index', compact('recipes'));
     }
 
     /**
