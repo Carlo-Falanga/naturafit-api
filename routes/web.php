@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\RecipeController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::middleware('auth')
 
         Route::resource('categories', CategoryController::class);
         Route::resource('tags', TagController::class);
+        Route::resource('recipes', RecipeController::class);
     });
 
 require __DIR__.'/auth.php';
