@@ -36,7 +36,16 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $newRecipe = new Recipe();
+
+        $newRecipe->fill($data);
+        $newRecipe->save();
+
+        $newRecipe->tags()->sync($data['tags'] ?? []);
+
+        return redirect()->route('admin.recipes.index');
     }
 
     /**
@@ -50,9 +59,12 @@ class RecipeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Recipe $recipe)
     {
-        //
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('admin.recipes.edit', compact('categories', 'tags', 'recipe'));
     }
 
     /**
