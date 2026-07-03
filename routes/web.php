@@ -25,8 +25,8 @@ Route::middleware('auth')
     ->prefix('admin')
     ->group(function () {
 
-        Route::resource('categories', CategoryController::class);
-        Route::resource('tags', TagController::class);
+        Route::resource('categories', CategoryController::class)->except(['create', 'edit']);
+        Route::resource('tags', TagController::class)->except(['create', 'edit']);
         Route::resource('recipes', RecipeController::class);
     });
 

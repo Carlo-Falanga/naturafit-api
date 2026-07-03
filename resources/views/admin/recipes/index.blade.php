@@ -1,57 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Recipes Index</title>
-</head>
-<body>
-    @foreach ($recipes as $recipe)
+@extends('layouts.admin')
+
+@section('content')
+
+    {{-- intestazione pagina --}}
+    <div class="d-flex justify-content-between align-items-start mb-4">
         <div>
-            <h2>{{ $recipe->title }}</h2>
-            <p>{{ $recipe->description }}</p>
-
-            @if ($recipe->image)
-                <img src="{{ $recipe->image }}" alt="{{ $recipe->title }}" width="200">
-            @endif
-
-            <ul>
-                <li>Categoria: {{ $recipe->category?->name ?? '—' }}</li>
-                <li>Porzioni: {{ $recipe->servings }}</li>
-                <li>Preparazione: {{ $recipe->prep_time }} min</li>
-                <li>Cottura: {{ $recipe->cook_time }} min</li>
-                <li>Difficoltà: {{ $recipe->difficulty }}</li>
-                <li>Calorie: {{ $recipe->calories }} kcal</li>
-                <li>Proteine: {{ $recipe->protein }} g</li>
-                <li>Carboidrati: {{ $recipe->carbs }} g</li>
-                <li>Grassi: {{ $recipe->fats }} g</li>
-                <li>Fibre: {{ $recipe->fiber }} g</li>
-                <li>Zuccheri: {{ $recipe->sugar }} g</li>
-            </ul>
-
-            <h3>Istruzioni</h3>
-            <p>{{ $recipe->instructions }}</p>
-
-            <h3>Tag</h3>
-            <ul>
-                @forelse ($recipe->tags as $tag)
-                    <li>{{ $tag->name }}</li>
-                @empty
-                    <li>Nessun tag</li>
-                @endforelse
-            </ul>
-
-            <a href="{{ route('admin.recipes.edit', $recipe) }}" class="btn btn-warning">
-                Modifica
-            </a>
-
-            <form action="{{ route('admin.recipes.destroy', $recipe) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger">Elimina</button>
-            </form>
+            <h1 class="fw-bold mb-0">Ricette</h1>
+            <p class="text-muted mb-0">{{ $recipes->count() }} ricette nel catalogo</p>
         </div>
-    @endforeach
-</body>
-</html>
+
+        <a href="{{ route('admin.recipes.create') }}" class="btn btn-success text-nowrap">+ Crea nuova</a>
+    </div>
+
+    {{-- tabella ricette --}}
+    <div class="card border-0 shadow-sm">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Tempo</th>
+                        <th>kcal</th>
+                        <th class="text-end">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($recipes as $recipe)
+                        <tr>
+                            {{-- nome + immagine + tag --}}
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    @if ($recipe->image)
+                                        <img src="{{ $recipe->image }}" alt="{{ $recipe->title }}"
+                                            class="rounded me-3" style="width: 48px; height: 48px; object-fit: cover;">
+                                    @else
+                                        <div class="bg-light rounded me-3" style="width: 48px; height: 48px;"></div>
+                                    @endif
+
+                                    <div>
+                                        <div class="fw-semibold">{{ $recipe->title }}</div>
+                                        <small class="text-muted">
+                                            {{ $recipe->tags->pluck('name')->join(', ') }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            {{-- categoria --}}
+                            <td>
+                                <span class="badge text-bg-light">{{ $recipe->category?->name ?? '—' }}</span>
+                            </td>
+
+                            {{-- tempo --}}
+                            <td>{{ $recipe->prep_time + $recipe->cook_time }} min</td>
+
+                            {{-- calorie --}}
+                            <td>
+                                <span class="badge bg-success rounded-pill">{{ $recipe->calories }} kcal</span>
+                            </td>
+
+                            {{-- azioni --}}
+                            <td class="text-end">
+                                <a href="{{ route('admin.recipes.edit', $recipe) }}"
+                                    class="btn btn-sm btn-outline-success">Modifica</a>
+
+                                <form action="{{ route('admin.recipes.destroy', $recipe) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-outline-danger">Elimina</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+@endsection

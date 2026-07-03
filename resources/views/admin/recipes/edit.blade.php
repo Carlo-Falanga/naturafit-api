@@ -1,82 +1,199 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Modifica Ricetta</title>
-</head>
-<body>
+@extends('layouts.admin')
+
+@section('content')
+
+    {{-- titolo --}}
+    <div class="mb-4">
+        <div class="mb-1">
+            <a href="{{ route('admin.recipes.index') }}" class="text-success text-decoration-none">Ricette</a>
+            <span class="text-muted">/ Modifica</span>
+        </div>
+        <h1 class="fw-bold mb-0">Modifica ricetta</h1>
+    </div>
+
     <form action="{{ route('admin.recipes.update', $recipe) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <label for="title">Titolo</label>
-        <input type="text" name="title" id="title" value="{{ old('title', $recipe->title) }}">
+        {{-- dati base --}}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold mb-4">Dati base</h5>
 
-        <label for="description">Descrizione</label>
-        <textarea name="description" id="description">{{ old('description', $recipe->description) }}</textarea>
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label for="title" class="form-label">Nome ricetta</label>
+                        <input type="text" name="title" id="title" class="form-control"
+                            placeholder="Es. Bowl di salmone e avocado" value="{{ old('title', $recipe->title) }}">
+                    </div>
 
-        <label for="servings">Porzioni</label>
-        <input type="number" name="servings" id="servings" value="{{ old('servings', $recipe->servings) }}">
+                    <div class="col-md-4">
+                        <label for="category_id" class="form-label">Categoria</label>
+                        <select name="category_id" id="category_id" class="form-select">
+                            <option value="">— Seleziona —</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" @selected(old('category_id', $recipe->category_id) == $category->id)>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-        <label for="prep_time">Tempo di preparazione (min)</label>
-        <input type="number" name="prep_time" id="prep_time" value="{{ old('prep_time', $recipe->prep_time) }}">
+                    <div class="col-12">
+                        <label for="description" class="form-label">Descrizione</label>
+                        <textarea name="description" id="description" class="form-control" rows="2"
+                            placeholder="Breve descrizione del piatto...">{{ old('description', $recipe->description) }}</textarea>
+                    </div>
 
-        <label for="cook_time">Tempo di cottura (min)</label>
-        <input type="number" name="cook_time" id="cook_time" value="{{ old('cook_time', $recipe->cook_time) }}">
+                    <div class="col-md-3">
+                        <label for="servings" class="form-label">Porzioni</label>
+                        <input type="number" name="servings" id="servings" class="form-control"
+                            value="{{ old('servings', $recipe->servings) }}">
+                    </div>
 
-        <label for="difficulty">Difficoltà</label>
-        <select name="difficulty" id="difficulty">
-            <option value="">— Seleziona —</option>
-            <option value="facile" @selected(old('difficulty', $recipe->difficulty) == 'facile')>Facile</option>
-            <option value="media" @selected(old('difficulty', $recipe->difficulty) == 'media')>Media</option>
-            <option value="difficile" @selected(old('difficulty', $recipe->difficulty) == 'difficile')>Difficile</option>
-        </select>
+                    <div class="col-md-3">
+                        <label for="prep_time" class="form-label">Prep (min)</label>
+                        <input type="number" name="prep_time" id="prep_time" class="form-control"
+                            value="{{ old('prep_time', $recipe->prep_time) }}">
+                    </div>
 
-        <label for="calories">Calorie (kcal)</label>
-        <input type="number" name="calories" id="calories" value="{{ old('calories', $recipe->calories) }}">
+                    <div class="col-md-3">
+                        <label for="cook_time" class="form-label">Cottura (min)</label>
+                        <input type="number" name="cook_time" id="cook_time" class="form-control"
+                            value="{{ old('cook_time', $recipe->cook_time) }}">
+                    </div>
 
-        <label for="protein">Proteine (g)</label>
-        <input type="number" step="0.01" name="protein" id="protein" value="{{ old('protein', $recipe->protein) }}">
+                    <div class="col-md-3">
+                        <label for="difficulty" class="form-label">Difficoltà</label>
+                        <select name="difficulty" id="difficulty" class="form-select">
+                            <option value="">- Seleziona -</option>
+                            <option value="facile" @selected(old('difficulty', $recipe->difficulty) == 'facile')>Facile</option>
+                            <option value="media" @selected(old('difficulty', $recipe->difficulty) == 'media')>Media</option>
+                            <option value="difficile" @selected(old('difficulty', $recipe->difficulty) == 'difficile')>Difficile</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <label for="carbs">Carboidrati (g)</label>
-        <input type="number" step="0.01" name="carbs" id="carbs" value="{{ old('carbs', $recipe->carbs) }}">
+        {{-- immagine --}}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold mb-4">Immagine</h5>
 
-        <label for="fats">Grassi (g)</label>
-        <input type="number" step="0.01" name="fats" id="fats" value="{{ old('fats', $recipe->fats) }}">
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-4">
+                        @if ($recipe->image)
+                            <img src="{{ $recipe->image }}" alt="Anteprima"
+                                class="img-fluid rounded w-100" style="height: 130px; object-fit: cover;">
+                        @else
+                            <div class="bg-success-subtle text-success d-flex align-items-center justify-content-center rounded"
+                                style="height: 130px;">
+                                Anteprima
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-md-8">
+                        <label for="image" class="form-label">Foto del piatto (URL)</label>
+                        <input type="text" name="image" id="image" class="form-control"
+                            placeholder="https://..." value="{{ old('image', $recipe->image) }}">
+                        <div class="form-text">Inserisci il link dell'immagine (JPG o PNG).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <label for="fiber">Fibre (g)</label>
-        <input type="number" step="0.01" name="fiber" id="fiber" value="{{ old('fiber', $recipe->fiber) }}">
+        {{-- valori nutrizionali --}}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold mb-4">Valori nutrizionali <small class="text-muted fw-normal">(per porzione)</small></h5>
 
-        <label for="sugar">Zuccheri (g)</label>
-        <input type="number" step="0.01" name="sugar" id="sugar" value="{{ old('sugar', $recipe->sugar) }}">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="calories" class="form-label">Calorie</label>
+                        <div class="input-group">
+                            <input type="number" name="calories" id="calories" class="form-control"
+                                value="{{ old('calories', $recipe->calories) }}">
+                            <span class="input-group-text">kcal</span>
+                        </div>
+                    </div>
 
-        <label for="instructions">Istruzioni</label>
-        <textarea name="instructions" id="instructions">{{ old('instructions', $recipe->instructions) }}</textarea>
+                    <div class="col-md-4">
+                        <label for="protein" class="form-label">Proteine</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" name="protein" id="protein" class="form-control"
+                                value="{{ old('protein', $recipe->protein) }}">
+                            <span class="input-group-text">g</span>
+                        </div>
+                    </div>
 
-        <label for="category_id">Categoria</label>
-        <select name="category_id" id="category_id">
-            <option value="">— Seleziona —</option>
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}" @selected(old('category_id', $recipe->category_id) == $category->id)>
-                    {{ $category->name }}
-                </option>
-            @endforeach
-        </select>
+                    <div class="col-md-4">
+                        <label for="carbs" class="form-label">Carboidrati</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" name="carbs" id="carbs" class="form-control"
+                                value="{{ old('carbs', $recipe->carbs) }}">
+                            <span class="input-group-text">g</span>
+                        </div>
+                    </div>
 
-        <fieldset>
-            <legend>Tag</legend>
-            @foreach ($tags as $tag)
-                <label>
-                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
-                        @checked(in_array($tag->id, old('tags', $recipe->tags->pluck('id')->all())))>
-                    {{ $tag->name }}
-                </label>
-            @endforeach
-        </fieldset>
+                    <div class="col-md-4">
+                        <label for="fats" class="form-label">Grassi</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" name="fats" id="fats" class="form-control"
+                                value="{{ old('fats', $recipe->fats) }}">
+                            <span class="input-group-text">g</span>
+                        </div>
+                    </div>
 
-        <button type="submit">Salva</button>
+                    <div class="col-md-4">
+                        <label for="fiber" class="form-label">Fibre</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" name="fiber" id="fiber" class="form-control"
+                                value="{{ old('fiber', $recipe->fiber) }}">
+                            <span class="input-group-text">g</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="sugar" class="form-label">Zuccheri</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" name="sugar" id="sugar" class="form-control"
+                                value="{{ old('sugar', $recipe->sugar) }}">
+                            <span class="input-group-text">g</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- istruzioni --}}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold mb-4">Istruzioni</h5>
+                <textarea name="instructions" id="instructions" class="form-control" rows="4"
+                    placeholder="Passaggi di preparazione...">{{ old('instructions', $recipe->instructions) }}</textarea>
+            </div>
+        </div>
+
+        {{-- tag --}}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold mb-4">Tag</h5>
+                @foreach ($tags as $tag)
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                            id="tag-{{ $tag->id }}" class="form-check-input"
+                            @checked(in_array($tag->id, old('tags', $recipe->tags->pluck('id')->all())))>
+                        <label class="form-check-label" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">Salva</button>
+            <a href="{{ route('admin.recipes.index') }}" class="btn btn-outline-secondary">Annulla</a>
+        </div>
     </form>
-</body>
-</html>
+
+@endsection
