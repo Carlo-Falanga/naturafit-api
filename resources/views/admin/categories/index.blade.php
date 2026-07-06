@@ -29,7 +29,7 @@
                         <tr>
                             <td class="fw-semibold">{{ $category->name }}</td>
                             <td class="text-end">
-                                {{-- apre la modale di modifica di questa categoria --}}
+                                {{-- apre la modale di modifica --}}
                                 <button type="button" class="btn btn-sm btn-outline-success"
                                     data-bs-toggle="modal" data-bs-target="#editModal-{{ $category->id }}">
                                     Modifica
@@ -44,7 +44,7 @@
                             </td>
                         </tr>
 
-                        {{-- modale modifica (una per categoria) --}}
+                        {{-- modale modifica --}}
                         <x-name-modal id="editModal-{{ $category->id }}" title="Modifica categoria" method="PUT"
                             :action="route('admin.categories.update', $category)" :value="$category->name" />
                     @endforeach
