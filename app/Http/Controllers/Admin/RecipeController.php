@@ -102,6 +102,12 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
+
+        if($recipe->image){
+
+            Storage::delete($recipe->image);
+        }
+
         $recipe->delete();
         return redirect()->route('admin.recipes.index');
     }
