@@ -11,7 +11,7 @@
         <h1 class="fw-bold mb-0">Modifica ricetta</h1>
     </div>
 
-    <form action="{{ route('admin.recipes.update', $recipe) }}" method="POST">
+    <form action="{{ route('admin.recipes.update', $recipe) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -83,21 +83,13 @@
 
                 <div class="row g-3 align-items-center">
                     <div class="col-md-4">
-                        @if ($recipe->image)
-                            <img src="{{ $recipe->image }}" alt="Anteprima"
-                                class="img-fluid rounded w-100" style="height: 130px; object-fit: cover;">
-                        @else
-                            <div class="bg-success-subtle text-success d-flex align-items-center justify-content-center rounded"
-                                style="height: 130px;">
-                                Anteprima
-                            </div>
-                        @endif
+                        <img id="preview" src="{{ asset('storage/' . $recipe->image) }}" alt="Anteprima"
+                            class="rounded" style="height: 130px; object-fit: cover;">
                     </div>
                     <div class="col-md-8">
-                        <label for="image" class="form-label">Foto del piatto (URL)</label>
-                        <input type="text" name="image" id="image" class="form-control"
-                            placeholder="https://..." value="{{ old('image', $recipe->image) }}">
-                        <div class="form-text">Inserisci il link dell'immagine (JPG o PNG).</div>
+                        <label for="image" class="form-label">Foto del piatto</label>
+                        <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                        <div class="form-text">Carica un'immagine (JPG o PNG).</div>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Recipe;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RecipeController extends Controller
 {
@@ -38,9 +39,14 @@ class RecipeController extends Controller
     {
         $data = $request->all();
 
+        if ($request->hasFile('image')) {
+            $data['image'] = Storage::putFile('recipes', $request->file('image'));
+        }
+
         $newRecipe = new Recipe();
 
         $newRecipe->fill($data);
+
         $newRecipe->save();
 
         $newRecipe->tags()->sync($data['tags'] ?? []);
@@ -73,6 +79,11 @@ class RecipeController extends Controller
     public function update(Request $request, Recipe $recipe)
     {
         $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            $data['image'] = Storage::putFile('recipes', $request->file('image'));
+        }
+
         $recipe->update($data);
 
         $recipe->tags()->sync($data['tags'] ?? []);

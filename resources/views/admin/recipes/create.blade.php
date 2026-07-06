@@ -11,7 +11,7 @@
         <h1 class="fw-bold mb-0">Crea ricetta</h1>
     </div>
 
-    <form action="{{ route('admin.recipes.store') }}" method="POST">
+    <form action="{{ route('admin.recipes.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         {{-- dati base --}}
@@ -88,10 +88,9 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <label for="image" class="form-label">Foto del piatto (URL)</label>
-                        <input type="text" name="image" id="image" class="form-control"
-                            placeholder="https://..." value="{{ old('image') }}">
-                        <div class="form-text">Inserisci il link dell'immagine (JPG o PNG).</div>
+                        <label for="image" class="form-label">Foto del piatto</label>
+                        <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                        <div class="form-text">Carica un'immagine (JPG o PNG).</div>
                     </div>
                 </div>
             </div>
