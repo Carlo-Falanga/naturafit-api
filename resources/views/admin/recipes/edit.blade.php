@@ -82,10 +82,14 @@
                 <h5 class="fw-bold mb-4">Immagine</h5>
 
                 <div class="row g-3 align-items-center">
+                    @if ($recipe->image)
+                        
                     <div class="col-md-4">
                         <img id="preview" src="{{ asset('storage/' . $recipe->image) }}" alt="Anteprima"
                             class="rounded" style="height: 130px; object-fit: cover;">
                     </div>
+                    
+                    @endif
                     <div class="col-md-8">
                         <label for="image" class="form-label">Foto del piatto</label>
                         <input type="file" name="image" id="image" class="form-control" accept="image/*">

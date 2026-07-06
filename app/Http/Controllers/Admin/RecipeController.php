@@ -81,6 +81,12 @@ class RecipeController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('image')) {
+
+            if ($recipe->image) {
+
+                Storage::delete($recipe->image);
+            }
+
             $data['image'] = Storage::putFile('recipes', $request->file('image'));
         }
 
