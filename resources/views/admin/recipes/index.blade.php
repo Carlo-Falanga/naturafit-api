@@ -39,7 +39,8 @@
                                     @endif
 
                                     <div>
-                                        <div class="fw-semibold">{{ $recipe->title }}</div>
+                                        <a href="{{ route('admin.recipes.show', $recipe) }}"
+                                            class="fw-semibold text-decoration-none text-dark">{{ $recipe->title }}</a>
                                         <small class="text-muted">
                                             {{ $recipe->tags->pluck('name')->join(', ') }}
                                         </small>
