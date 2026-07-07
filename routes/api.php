@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\RecipeController;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,4 +10,6 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 Route::get('recipes', [RecipeController::class, 'index']);
+
+Route::get('recipes/{recipe}', [RecipeController::class, 'show']);
 
