@@ -10,7 +10,8 @@ class Tag extends Model
         'name',
     ];
 
-    public function recipes(){
+    public function recipes()
+    {
         return $this->belongsToMany(Recipe::class);
     }
 }

@@ -9,11 +9,12 @@ use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
 class RecipeController extends Controller
 {
-    public function index(){
- 
-    $recipes = Recipe::with('category')->get();
- 
-       return response()->json(
+    public function index()
+    {
+
+        $recipes = Recipe::with('category')->get();
+
+        return response()->json(
             [
                 "success" => true,
                 "data" => $recipes
@@ -21,7 +22,8 @@ class RecipeController extends Controller
         );
     }
 
-    public function show(Recipe $recipe){
+    public function show(Recipe $recipe)
+    {
 
 
         $recipe->load('category', 'tags');
@@ -32,5 +34,5 @@ class RecipeController extends Controller
                 "data" => $recipe
             ]
         );
-    } 
+    }
 }

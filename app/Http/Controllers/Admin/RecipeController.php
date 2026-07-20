@@ -103,7 +103,7 @@ class RecipeController extends Controller
     public function destroy(Recipe $recipe)
     {
 
-        if($recipe->image){
+        if ($recipe->image) {
 
             Storage::delete($recipe->image);
         }
