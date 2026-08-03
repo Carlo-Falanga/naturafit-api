@@ -14,6 +14,14 @@
         </button>
     </div>
 
+    {{-- messaggio di errore --}}
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi"></button>
+        </div>
+    @endif
+
     {{-- tabella categorie --}}
     <div class="card border-0 shadow-sm">
         <div class="table-responsive">
@@ -21,6 +29,7 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
+                        <th>Ricette</th>
                         <th class="text-end">Azioni</th>
                     </tr>
                 </thead>
@@ -28,6 +37,9 @@
                     @foreach ($categories as $category)
                         <tr>
                             <td class="fw-semibold">{{ $category->name }}</td>
+                            <td>
+                                <span class="badge text-bg-light">{{ $category->recipes_count }}</span>
+                            </td>
                             <td class="text-end">
                                 {{-- apre la modale di modifica --}}
                                 <button type="button" class="btn btn-sm btn-outline-success"
@@ -39,7 +51,14 @@
                                     class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-outline-danger">Elimina</button>
+                                    @if ($category->recipes_count > 0)
+                                        <button class="btn btn-sm btn-outline-danger" disabled
+                                            title="Non eliminabile: {{ $category->recipes_count }} {{ $category->recipes_count === 1 ? 'ricetta collegata' : 'ricette collegate' }}">
+                                            Elimina
+                                        </button>
+                                    @else
+                                        <button class="btn btn-sm btn-outline-danger">Elimina</button>
+                                    @endif
                                 </form>
                             </td>
                         </tr>

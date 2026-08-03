@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withCount('recipes')->get();
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -52,6 +52,17 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $recipesCount = $category->recipes()->count();
+
+        if ($recipesCount > 0) {
+            $recipesLabel = $recipesCount === 1
+                ? "c'è 1 ricetta collegata"
+                : "ci sono {$recipesCount} ricette collegate";
+
+            return redirect()->route('admin.categories.index')
+                ->with('error', "Impossibile eliminare la categoria \"{$category->name}\": {$recipesLabel}.");
+        }
+
         $category->delete();
         return redirect()->route('admin.categories.index');
     }
