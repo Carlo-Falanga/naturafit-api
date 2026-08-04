@@ -24,7 +24,7 @@
                     <div class="col-md-8">
                         <label for="title" class="form-label">Nome ricetta</label>
                         <input type="text" name="title" id="title" class="form-control"
-                            placeholder="Es. Bowl di salmone e avocado" value="{{ old('title', $recipe->title) }}">
+                            placeholder="Es. Bowl di salmone e avocado" value="{{ $recipe->title }}">
                     </div>
 
                     <div class="col-md-4">
@@ -32,7 +32,7 @@
                         <select name="category_id" id="category_id" class="form-select">
                             <option value="">— Seleziona —</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" @selected(old('category_id', $recipe->category_id) == $category->id)>
+                                <option value="{{ $category->id }}" @selected($recipe->category_id == $category->id)>
                                     {{ $category->name }}
                                 </option>
                             @endforeach
@@ -42,34 +42,34 @@
                     <div class="col-12">
                         <label for="description" class="form-label">Descrizione</label>
                         <textarea name="description" id="description" class="form-control" rows="2"
-                            placeholder="Breve descrizione del piatto...">{{ old('description', $recipe->description) }}</textarea>
+                            placeholder="Breve descrizione del piatto...">{{ $recipe->description }}</textarea>
                     </div>
 
                     <div class="col-md-3">
                         <label for="servings" class="form-label">Porzioni</label>
                         <input type="number" name="servings" id="servings" class="form-control"
-                            value="{{ old('servings', $recipe->servings) }}">
+                            value="{{ $recipe->servings }}">
                     </div>
 
                     <div class="col-md-3">
                         <label for="prep_time" class="form-label">Prep (min)</label>
                         <input type="number" name="prep_time" id="prep_time" class="form-control"
-                            value="{{ old('prep_time', $recipe->prep_time) }}">
+                            value="{{ $recipe->prep_time }}">
                     </div>
 
                     <div class="col-md-3">
                         <label for="cook_time" class="form-label">Cottura (min)</label>
                         <input type="number" name="cook_time" id="cook_time" class="form-control"
-                            value="{{ old('cook_time', $recipe->cook_time) }}">
+                            value="{{ $recipe->cook_time }}">
                     </div>
 
                     <div class="col-md-3">
                         <label for="difficulty" class="form-label">Difficoltà</label>
                         <select name="difficulty" id="difficulty" class="form-select">
                             <option value="">- Seleziona -</option>
-                            <option value="facile" @selected(old('difficulty', $recipe->difficulty) == 'facile')>Facile</option>
-                            <option value="media" @selected(old('difficulty', $recipe->difficulty) == 'media')>Media</option>
-                            <option value="difficile" @selected(old('difficulty', $recipe->difficulty) == 'difficile')>Difficile</option>
+                            <option value="facile" @selected($recipe->difficulty == 'facile')>Facile</option>
+                            <option value="media" @selected($recipe->difficulty == 'media')>Media</option>
+                            <option value="difficile" @selected($recipe->difficulty == 'difficile')>Difficile</option>
                         </select>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                         <label for="calories" class="form-label">Calorie</label>
                         <div class="input-group">
                             <input type="number" name="calories" id="calories" class="form-control"
-                                value="{{ old('calories', $recipe->calories) }}">
+                                value="{{ $recipe->calories }}">
                             <span class="input-group-text">kcal</span>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                         <label for="protein" class="form-label">Proteine</label>
                         <div class="input-group">
                             <input type="number" step="0.01" name="protein" id="protein" class="form-control"
-                                value="{{ old('protein', $recipe->protein) }}">
+                                value="{{ $recipe->protein }}">
                             <span class="input-group-text">g</span>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                         <label for="carbs" class="form-label">Carboidrati</label>
                         <div class="input-group">
                             <input type="number" step="0.01" name="carbs" id="carbs" class="form-control"
-                                value="{{ old('carbs', $recipe->carbs) }}">
+                                value="{{ $recipe->carbs }}">
                             <span class="input-group-text">g</span>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                         <label for="fats" class="form-label">Grassi</label>
                         <div class="input-group">
                             <input type="number" step="0.01" name="fats" id="fats" class="form-control"
-                                value="{{ old('fats', $recipe->fats) }}">
+                                value="{{ $recipe->fats }}">
                             <span class="input-group-text">g</span>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                         <label for="fiber" class="form-label">Fibre</label>
                         <div class="input-group">
                             <input type="number" step="0.01" name="fiber" id="fiber" class="form-control"
-                                value="{{ old('fiber', $recipe->fiber) }}">
+                                value="{{ $recipe->fiber }}">
                             <span class="input-group-text">g</span>
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                         <label for="sugar" class="form-label">Zuccheri</label>
                         <div class="input-group">
                             <input type="number" step="0.01" name="sugar" id="sugar" class="form-control"
-                                value="{{ old('sugar', $recipe->sugar) }}">
+                                value="{{ $recipe->sugar }}">
                             <span class="input-group-text">g</span>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
             <div class="card-body">
                 <h5 class="fw-bold mb-4">Istruzioni</h5>
                 <textarea name="instructions" id="instructions" class="form-control" rows="4"
-                    placeholder="Passaggi di preparazione...">{{ old('instructions', $recipe->instructions) }}</textarea>
+                    placeholder="Passaggi di preparazione...">{{ $recipe->instructions }}</textarea>
             </div>
         </div>
 
@@ -179,7 +179,7 @@
                     <div class="form-check form-check-inline">
                         <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
                             id="tag-{{ $tag->id }}" class="form-check-input"
-                            @checked(in_array($tag->id, old('tags', $recipe->tags->pluck('id')->all())))>
+                            @checked($recipe->tags->contains($tag))>
                         <label class="form-check-label" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
                     </div>
                 @endforeach

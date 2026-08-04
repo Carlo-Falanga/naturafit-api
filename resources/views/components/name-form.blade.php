@@ -13,7 +13,7 @@
     <div class="card border-0 shadow-sm mb-4">
         <div class="card-body">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $value) }}"
+            <input type="text" name="name" id="name" class="form-control" value="{{ $value }}"
                 placeholder="{{ $placeholder }}">
         </div>
     </div>

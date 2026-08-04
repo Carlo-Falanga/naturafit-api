@@ -23,7 +23,7 @@
                     <div class="col-md-8">
                         <label for="title" class="form-label">Nome ricetta</label>
                         <input type="text" name="title" id="title" class="form-control"
-                            placeholder="Es. Bowl di salmone e avocado" value="{{ old('title') }}">
+                            placeholder="Es. Bowl di salmone e avocado">
                     </div>
 
                     <div class="col-md-4">
@@ -31,7 +31,7 @@
                         <select name="category_id" id="category_id" class="form-select">
                             <option value="">— Seleziona —</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
+                                <option value="{{ $category->id }}">
                                     {{ $category->name }}
                                 </option>
                             @endforeach
@@ -41,34 +41,31 @@
                     <div class="col-12">
                         <label for="description" class="form-label">Descrizione</label>
                         <textarea name="description" id="description" class="form-control" rows="2"
-                            placeholder="Breve descrizione del piatto...">{{ old('description') }}</textarea>
+                            placeholder="Breve descrizione del piatto..."></textarea>
                     </div>
 
                     <div class="col-md-3">
                         <label for="servings" class="form-label">Porzioni</label>
-                        <input type="number" name="servings" id="servings" class="form-control"
-                            value="{{ old('servings') }}">
+                        <input type="number" name="servings" id="servings" class="form-control">
                     </div>
 
                     <div class="col-md-3">
                         <label for="prep_time" class="form-label">Prep (min)</label>
-                        <input type="number" name="prep_time" id="prep_time" class="form-control"
-                            value="{{ old('prep_time') }}">
+                        <input type="number" name="prep_time" id="prep_time" class="form-control">
                     </div>
 
                     <div class="col-md-3">
                         <label for="cook_time" class="form-label">Cottura (min)</label>
-                        <input type="number" name="cook_time" id="cook_time" class="form-control"
-                            value="{{ old('cook_time') }}">
+                        <input type="number" name="cook_time" id="cook_time" class="form-control">
                     </div>
 
                     <div class="col-md-3">
                         <label for="difficulty" class="form-label">Difficoltà</label>
                         <select name="difficulty" id="difficulty" class="form-select">
                             <option value="">— Seleziona —</option>
-                            <option value="facile" @selected(old('difficulty') == 'facile')>Facile</option>
-                            <option value="media" @selected(old('difficulty') == 'media')>Media</option>
-                            <option value="difficile" @selected(old('difficulty') == 'difficile')>Difficile</option>
+                            <option value="facile">Facile</option>
+                            <option value="media">Media</option>
+                            <option value="difficile">Difficile</option>
                         </select>
                     </div>
                 </div>
@@ -105,8 +102,7 @@
                     <div class="col-md-4">
                         <label for="calories" class="form-label">Calorie</label>
                         <div class="input-group">
-                            <input type="number" name="calories" id="calories" class="form-control"
-                                value="{{ old('calories') }}">
+                            <input type="number" name="calories" id="calories" class="form-control">
                             <span class="input-group-text">kcal</span>
                         </div>
                     </div>
@@ -114,8 +110,7 @@
                     <div class="col-md-4">
                         <label for="protein" class="form-label">Proteine</label>
                         <div class="input-group">
-                            <input type="number" step="0.01" name="protein" id="protein" class="form-control"
-                                value="{{ old('protein') }}">
+                            <input type="number" step="0.01" name="protein" id="protein" class="form-control">
                             <span class="input-group-text">g</span>
                         </div>
                     </div>
@@ -123,8 +118,7 @@
                     <div class="col-md-4">
                         <label for="carbs" class="form-label">Carboidrati</label>
                         <div class="input-group">
-                            <input type="number" step="0.01" name="carbs" id="carbs" class="form-control"
-                                value="{{ old('carbs') }}">
+                            <input type="number" step="0.01" name="carbs" id="carbs" class="form-control">
                             <span class="input-group-text">g</span>
                         </div>
                     </div>
@@ -132,8 +126,7 @@
                     <div class="col-md-4">
                         <label for="fats" class="form-label">Grassi</label>
                         <div class="input-group">
-                            <input type="number" step="0.01" name="fats" id="fats" class="form-control"
-                                value="{{ old('fats') }}">
+                            <input type="number" step="0.01" name="fats" id="fats" class="form-control">
                             <span class="input-group-text">g</span>
                         </div>
                     </div>
@@ -141,8 +134,7 @@
                     <div class="col-md-4">
                         <label for="fiber" class="form-label">Fibre</label>
                         <div class="input-group">
-                            <input type="number" step="0.01" name="fiber" id="fiber" class="form-control"
-                                value="{{ old('fiber') }}">
+                            <input type="number" step="0.01" name="fiber" id="fiber" class="form-control">
                             <span class="input-group-text">g</span>
                         </div>
                     </div>
@@ -150,8 +142,7 @@
                     <div class="col-md-4">
                         <label for="sugar" class="form-label">Zuccheri</label>
                         <div class="input-group">
-                            <input type="number" step="0.01" name="sugar" id="sugar" class="form-control"
-                                value="{{ old('sugar') }}">
+                            <input type="number" step="0.01" name="sugar" id="sugar" class="form-control">
                             <span class="input-group-text">g</span>
                         </div>
                     </div>
@@ -164,7 +155,7 @@
             <div class="card-body">
                 <h5 class="fw-bold mb-4">Istruzioni</h5>
                 <textarea name="instructions" id="instructions" class="form-control" rows="4"
-                    placeholder="Passaggi di preparazione...">{{ old('instructions') }}</textarea>
+                    placeholder="Passaggi di preparazione..."></textarea>
             </div>
         </div>
 
@@ -175,8 +166,7 @@
                 @foreach ($tags as $tag)
                     <div class="form-check form-check-inline">
                         <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
-                            id="tag-{{ $tag->id }}" class="form-check-input"
-                            @checked(in_array($tag->id, old('tags', [])))>
+                            id="tag-{{ $tag->id }}" class="form-check-input">
                         <label class="form-check-label" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
                     </div>
                 @endforeach
