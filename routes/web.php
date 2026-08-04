@@ -34,8 +34,8 @@ Route::middleware('auth')
     ->prefix('admin')
     ->group(function () {
 
-        Route::resource('categories', CategoryController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::resource('tags', TagController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('categories', CategoryController::class);
+        Route::resource('tags', TagController::class);
         Route::resource('recipes', RecipeController::class);
     });
 
