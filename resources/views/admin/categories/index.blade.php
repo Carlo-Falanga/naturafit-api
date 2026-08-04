@@ -8,10 +8,9 @@
             <h1 class="fw-bold mb-0">Categorie</h1>
             <p class="text-muted mb-0">{{ $categories->count() }} categorie</p>
         </div>
-        {{-- apre la modale di creazione --}}
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
+        <a href="{{ route('admin.categories.create') }}" class="btn btn-success">
             + Crea nuova
-        </button>
+        </a>
     </div>
 
     {{-- messaggio di errore --}}
@@ -41,11 +40,10 @@
                                 <span class="badge text-bg-light">{{ $category->recipes_count }}</span>
                             </td>
                             <td class="text-end">
-                                {{-- apre la modale di modifica --}}
-                                <button type="button" class="btn btn-sm btn-outline-success"
-                                    data-bs-toggle="modal" data-bs-target="#editModal-{{ $category->id }}">
+                                <a href="{{ route('admin.categories.edit', $category) }}"
+                                    class="btn btn-sm btn-outline-success">
                                     Modifica
-                                </button>
+                                </a>
 
                                 <form action="{{ route('admin.categories.destroy', $category) }}" method="POST"
                                     class="d-inline">
@@ -62,18 +60,10 @@
                                 </form>
                             </td>
                         </tr>
-
-                        {{-- modale modifica --}}
-                        <x-name-modal id="editModal-{{ $category->id }}" title="Modifica categoria" method="PUT"
-                            :action="route('admin.categories.update', $category)" :value="$category->name" />
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-
-    {{-- modale creazione --}}
-    <x-name-modal id="createModal" title="Nuova categoria"
-        :action="route('admin.categories.store')" placeholder="Es. Colazione" />
 
 @endsection

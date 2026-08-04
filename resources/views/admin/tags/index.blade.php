@@ -8,10 +8,9 @@
             <h1 class="fw-bold mb-0">Tag</h1>
             <p class="text-muted mb-0">{{ $tags->count() }} tag</p>
         </div>
-        {{-- apre la modale di creazione --}}
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
+        <a href="{{ route('admin.tags.create') }}" class="btn btn-success">
             + Crea nuovo
-        </button>
+        </a>
     </div>
 
     {{-- tabella tag --}}
@@ -29,11 +28,10 @@
                         <tr>
                             <td class="fw-semibold">{{ $tag->name }}</td>
                             <td class="text-end">
-                                {{-- apre la modale di modifica --}}
-                                <button type="button" class="btn btn-sm btn-outline-success"
-                                    data-bs-toggle="modal" data-bs-target="#editModal-{{ $tag->id }}">
+                                <a href="{{ route('admin.tags.edit', $tag) }}"
+                                    class="btn btn-sm btn-outline-success">
                                     Modifica
-                                </button>
+                                </a>
 
                                 <form action="{{ route('admin.tags.destroy', $tag) }}" method="POST"
                                     class="d-inline">
@@ -43,18 +41,10 @@
                                 </form>
                             </td>
                         </tr>
-
-                        {{-- modale modifica  --}}
-                        <x-name-modal id="editModal-{{ $tag->id }}" title="Modifica tag" method="PUT"
-                            :action="route('admin.tags.update', $tag)" :value="$tag->name" />
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-
-    {{-- modale creazione --}}
-    <x-name-modal id="createModal" title="Nuovo tag"
-        :action="route('admin.tags.store')" placeholder="Es. Vegano" />
 
 @endsection
