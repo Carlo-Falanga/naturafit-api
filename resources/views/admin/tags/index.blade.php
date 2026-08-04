@@ -33,12 +33,10 @@
                                     Modifica
                                 </a>
 
-                                <form action="{{ route('admin.tags.destroy', $tag) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Sei sicuro di voler eliminare il tag?')">Elimina</button>
-                                </form>
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $tag->id }}">
+                                    Elimina
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -46,5 +44,11 @@
             </table>
         </div>
     </div>
+
+    {{-- modali di conferma eliminazione --}}
+    @foreach ($tags as $tag)
+        <x-delete-modal id="deleteModal-{{ $tag->id }}" :action="route('admin.tags.destroy', $tag)"
+            name="il tag {{ $tag->name }}" />
+    @endforeach
 
 @endsection

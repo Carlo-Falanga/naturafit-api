@@ -45,19 +45,17 @@
                                     Modifica
                                 </a>
 
-                                <form action="{{ route('admin.categories.destroy', $category) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    @if ($category->recipes_count > 0)
-                                        <button class="btn btn-sm btn-outline-danger" disabled
-                                            title="Non eliminabile: {{ $category->recipes_count }} {{ $category->recipes_count === 1 ? 'ricetta collegata' : 'ricette collegate' }}">
-                                            Elimina
-                                        </button>
-                                    @else
-                                        <button class="btn btn-sm btn-outline-danger"  onclick="return confirm('Sei sicuro di voler eliminare la categoria?')">Elimina</button>
-                                    @endif
-                                </form>
+                                @if ($category->recipes_count > 0)
+                                    <button class="btn btn-sm btn-outline-danger" disabled
+                                        title="Non eliminabile: {{ $category->recipes_count }} {{ $category->recipes_count === 1 ? 'ricetta collegata' : 'ricette collegate' }}">
+                                        Elimina
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $category->id }}">
+                                        Elimina
+                                    </button>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -65,5 +63,13 @@
             </table>
         </div>
     </div>
+
+    {{-- modali di conferma eliminazione --}}
+    @foreach ($categories as $category)
+        @if ($category->recipes_count === 0)
+            <x-delete-modal id="deleteModal-{{ $category->id }}"
+                :action="route('admin.categories.destroy', $category)" name="la categoria {{ $category->name }}" />
+        @endif
+    @endforeach
 
 @endsection

@@ -66,12 +66,10 @@
                                 <a href="{{ route('admin.recipes.edit', $recipe) }}"
                                     class="btn btn-sm btn-outline-success">Modifica</a>
 
-                                <form action="{{ route('admin.recipes.destroy', $recipe) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Sei sicuro di voler eliminare la ricetta?')">Elimina</button>
-                                </form>
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $recipe->id }}">
+                                    Elimina
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -79,5 +77,11 @@
             </table>
         </div>
     </div>
+
+    {{-- modali di conferma eliminazione --}}
+    @foreach ($recipes as $recipe)
+        <x-delete-modal id="deleteModal-{{ $recipe->id }}" :action="route('admin.recipes.destroy', $recipe)"
+            name="la ricetta {{ $recipe->title }}" />
+    @endforeach
 
 @endsection
