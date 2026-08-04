@@ -70,6 +70,12 @@
 
                         <hr>
 
+                        {{-- torna al sito pubblico --}}
+                        <a href="{{ config('app.frontend_url') }}"
+                            class="btn btn-link text-success text-decoration-none px-3 align-self-start">
+                            <i class="bi bi-arrow-left"></i> Torna al sito
+                        </a>
+
                         {{-- logout --}}
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
