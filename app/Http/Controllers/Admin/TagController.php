@@ -19,6 +19,14 @@ class TagController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('admin.tags.create');
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -31,6 +39,14 @@ class TagController extends Controller
         $newTag->save();
 
         return redirect()->route('admin.tags.index');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Tag $tag)
+    {
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
