@@ -13,14 +13,6 @@
         </a>
     </div>
 
-    {{-- messaggio di errore --}}
-    @if (session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi"></button>
-        </div>
-    @endif
-
     {{-- tabella categorie --}}
     <div class="card border-0 shadow-sm">
         <div class="table-responsive">
