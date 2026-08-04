@@ -39,7 +39,7 @@
                                     class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-outline-danger">Elimina</button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Sei sicuro di voler eliminare il tag?')">Elimina</button>
                                 </form>
                             </td>
                         </tr>
