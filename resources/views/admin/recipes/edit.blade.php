@@ -86,7 +86,7 @@
                         
                     <div class="col-md-4">
                         <img id="preview" src="{{ asset('storage/' . $recipe->image) }}" alt="Anteprima"
-                            class="rounded" style="height: 130px; object-fit: cover;">
+                            class="rounded recipe-preview">
                     </div>
                     
                     @endif

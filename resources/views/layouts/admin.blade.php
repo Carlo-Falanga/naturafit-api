@@ -21,7 +21,7 @@
                 <i class="bi bi-list"></i>
             </button>
             <span class="fw-bold">NaturaFit</span>
-            <span style="width: 24px;"></span>
+            <span class="topbar-spacer"></span>
         </div>
     </nav>
 
@@ -35,8 +35,7 @@
                     {{-- logo + chiudi --}}
                     <div class="offcanvas-header border-bottom">
                         <div class="d-flex align-items-center">
-                            <span class="bg-success text-white fw-bold rounded d-flex align-items-center justify-content-center me-2"
-                                style="width: 32px; height: 32px;">N</span>
+                            <span class="bg-success text-white fw-bold rounded d-flex align-items-center justify-content-center me-2 admin-logo">N</span>
                             <span class="fs-5 fw-bold">NaturaFit</span>
                         </div>
                         <button type="button" class="btn-close d-md-none" data-bs-dismiss="offcanvas"

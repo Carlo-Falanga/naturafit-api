@@ -18,10 +18,9 @@
                 <div class="col-md-4">
                     @if ($recipe->image)
                         <img src="{{ asset('storage/' . $recipe->image) }}" alt="{{ $recipe->title }}"
-                            class="img-fluid rounded w-100" style="height: 200px; object-fit: cover;">
+                            class="img-fluid rounded w-100 recipe-cover">
                     @else
-                        <div class="bg-success-subtle text-success d-flex align-items-center justify-content-center rounded"
-                            style="height: 200px;">
+                        <div class="bg-success-subtle text-success d-flex align-items-center justify-content-center rounded recipe-cover">
                             Nessuna immagine
                         </div>
                     @endif

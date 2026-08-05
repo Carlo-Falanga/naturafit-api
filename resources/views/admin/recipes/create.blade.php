@@ -79,8 +79,7 @@
 
                 <div class="row g-3 align-items-center">
                     <div class="col-md-4">
-                        <div class="bg-success-subtle text-success d-flex align-items-center justify-content-center rounded"
-                            style="height: 130px;">
+                        <div class="bg-success-subtle text-success d-flex align-items-center justify-content-center rounded recipe-preview">
                             Anteprima
                         </div>
                     </div>

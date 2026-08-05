@@ -1,1 +1,26 @@
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+.topbar-spacer {
+    width: 24px;
+}
+
+.admin-logo {
+    width: 32px;
+    height: 32px;
+}
+
+.recipe-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+}
+
+.recipe-preview {
+    height: 130px;
+    object-fit: cover;
+}
+
+.recipe-cover {
+    height: 200px;
+    object-fit: cover;
+}

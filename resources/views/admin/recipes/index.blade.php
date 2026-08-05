@@ -33,9 +33,9 @@
                                 <div class="d-flex align-items-center">
                                     @if ($recipe->image)
                                         <img src="{{ asset('storage/' . $recipe->image) }}" alt="{{ $recipe->title }}"
-                                            class="rounded me-3" style="width: 48px; height: 48px; object-fit: cover;">
+                                            class="rounded me-3 recipe-thumb">
                                     @else
-                                        <div class="bg-light rounded me-3" style="width: 48px; height: 48px;"></div>
+                                        <div class="bg-light rounded me-3 recipe-thumb"></div>
                                     @endif
 
                                     <div>
