@@ -30,7 +30,7 @@
                     <div class="col-md-4">
                         <label for="category_id" class="form-label">Categoria</label>
                         <select name="category_id" id="category_id" class="form-select">
-                            <option value="">— Seleziona —</option>
+                            <option value="">- Seleziona -</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" @selected($recipe->category_id == $category->id)>
                                     {{ $category->name }}
