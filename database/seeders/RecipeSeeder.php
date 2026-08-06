@@ -198,11 +198,12 @@ class RecipeSeeder extends Seeder
             ],
         ];
 
-        // cancello le ricette vecchie, così se rilancio il seeder non ho i doppioni
+        // cancello le ricette vecchie
         Recipe::query()->delete();
 
         foreach ($recipes as $recipe) {
 
+            // recupero la categoria e i tag associati alla ricetta
             $category = Category::where('name', $recipe['category'])->first();
             $tags = Tag::whereIn('name', $recipe['tags'])->pluck('id');
 
