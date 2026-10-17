@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
-use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
 class RecipeController extends Controller
 {
