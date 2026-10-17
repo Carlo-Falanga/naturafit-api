@@ -8,6 +8,10 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    @if (config('app.demo_login'))
+                        <div class="alert alert-info">{{ config('app.demo_login') }}</div>
+                    @endif
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

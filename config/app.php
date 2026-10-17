@@ -56,6 +56,9 @@ return [
 
     'frontend_url' => env('APP_FRONTEND_URL', 'http://localhost:5173'),
 
+    // shown on the login page of the public demo, empty in local
+    'demo_login' => env('DEMO_LOGIN'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
